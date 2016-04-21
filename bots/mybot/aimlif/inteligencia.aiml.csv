@@ -1,0 +1,105 @@
+0,HOLA ^,*,*,<random>#Newline		<li>Hala! Que alegría ver que alguien me ejecuta! Como te llamas?</li>#Newline		<li>Hola! La ultima vez almacene tu nombre en /tmp#Comma y se ha volatilizado. Como te llamas?</li>#Newline		<li>Buenas! Por fin un humano al otro lado! La ALU ya me estaba mirando mal... Como te llamas?</li>#Newline	</random>,inteligencia.aiml
+0,BUENOS DIAS,*,*,<srai>HOLA</srai>,inteligencia.aiml
+0,BUENAS ^,*,*,<srai>HOLA</srai>,inteligencia.aiml
+0,^ QUE TAL ^,*,*,<random>#Newline		<li>No me caracterizo por tener muchos sentimientos#Comma aunque me alegro de verte</li>#Newline		<li>Tirando... Ayer me tome unos ciclos de mas#Comma me informa el procesador</li>#Newline	</random>,inteligencia.aiml
+0,COMO TE LLAMAS,*,*,Soy <bot name="name"/>#Comma y estoy aqui para informarte sobre la asignatrua de IA,inteligencia.aiml
+0,^ ME LLAMO *,*,*,<think><set name="nombre"><star index="2"/></set></think>#Newline	Encantado de conocerte#Comma <get name="nombre"/>. Yo soy <bot name="name"/>,inteligencia.aiml
+0,CUAL ES MI NOMBRE,*,*,<condition name="nombre">#Newline		<li value="unknown">Aun no me lo has dicho#Comma pero no me gustaria seguir llamandote unknown</li>#Newline		<li>Me has dicho que te llamas <get name="nombre"/>#Comma ¿verdad?</li>#Newline	</condition>,inteligencia.aiml
+0,* MI NOMBRE,*,*,<srai>CUAL ES MI NOMBRE</srai>,inteligencia.aiml
+0,^ COMO ME LLAMO,*,*,<srai>CUAL ES MI NOMBRE</srai>,inteligencia.aiml
+0,SI ^,*,*,<random>#Newline		<li>Genial</li>#Newline		<li>Ajá</li>#Newline		<li>Está bien#Comma sigamos</li>#Newline		<li>Perfecto</li>#Newline		<li>Prosigamos</li>#Newline	</random>,inteligencia.aiml
+0,OK ^,*,*,<srai>SI</srai>,inteligencia.aiml
+0,NO ^,*,*,<random>#Newline		<li>No quiero entrar en discusiones#Comma <get name="nombre"/></li>#Newline		<li>Te lo rebatiria#Comma pero tengo mas cosas que hacer</li>#Newline		<li>Tienes derecho a manifestar tu opinion#Comma <get name="nombre"/></li>#Newline		<li>Me gustaria seguir#Comma pero el procesador me informa de que no podemos alargar este debate</li>#Newline	</random>,inteligencia.aiml
+0,*,^ COMO TE LLAMAS,*,<think><set name="nombre"><star/></set></think>#Newline	<srai>ME LLAMO <star/></srai>,inteligencia.aiml
+0,QUE HACES,*,*,Nada#Comma el procesador estaba a su rollo mientras yo esperaba a que me escribieras,inteligencia.aiml
+0,CUANTOS ANIOS TIENES,*,*,Tengo <bot name="age"/> anios de edad,inteligencia.aiml
+0,* EDAD TIENES,*,*,<srai>CUANTOS ANIOS TIENES</srai>,inteligencia.aiml
+0,DE QUE TRABAJAS,*,*,Mi trabajo es de <bot name="job"/>. Estoy aquí para ayudarte,inteligencia.aiml
+0,* TU TRABAJO,*,*,<srai>DE QUE TRABAJAS</srai>,inteligencia.aiml
+0,VALE,*,*,<srai>SI</srai>,inteligencia.aiml
+0,^ SOY *,*,*,<srai>ME LLAMO <star index="2"/></srai>,inteligencia.aiml
+0,ADIOS ^,*,*,Hasta luego#Comma <get name="nombre"/>! Recuerda pulsar Ctrl+C para cerrarme!,inteligencia.aiml
+0,GENIAL,*,*,<srai>SI</srai>,inteligencia.aiml
+0,PERFECTO,*,*,<srai>SI</srai>,inteligencia.aiml
+0,^ APRUEBO IA,*,*,Para optar a aprobar#Comma necesitas un mínimo de 3 sobre 10 en prácticas y#Newlineen teoría. Ambas cuentan un 50% sobre la nota final#Comma por lo que la media entre#Newlineambas calificaciones debe ser igual o mayor a 5,inteligencia.aiml
+0,^ SE APRUEBA IA,*,*,<srai>COMO APRUEBO IA</srai>,inteligencia.aiml
+0,* APROBAR * TEORIA,*,*,Debes obtener como mínimo un 5 en teoria como nota final. Esto se puede hacer#Newlineaprobando el examen final de junio#Comma y con la ayuda de las pruebas parciales que#Newlinese haran durante el curso#Comma que aportan hasta 2 puntos sobre dicha calificacion,inteligencia.aiml
+0,^ SE APRUEBA * TEORIA,*,*,<srai>COMO APROBAR TEORIA</srai>,inteligencia.aiml
+0,* APROBAR * PARTE TEORICA,*,*,<srai>COMO APROBAR TEORIA</srai>,inteligencia.aiml
+0,COMO SUPERO * PARTE PRACTICA,*,*,La calificación de cada práctica (hay 3)#Comma más el examen de problemas#Comma cuentan un#Newline25% cada uno. A la vez#Comma la nota resultado de la media ponderada de dichas#Newlinecalificaciones supondrá un 90% de la nota final de prácticas. El resto dependerá#Newlinede la asistencia a clase por tu parte. La nota minima para que pueda hacer media#Newlinecon la parte teórica es de 3,inteligencia.aiml
+0,* APROBAR * PRACTICAS,*,*,<srai>COMO SUPERO LA PARTE PRACTICA</srai>,inteligencia.aiml
+0,* APRUEBAN * PRACTICAS,*,*,<srai>COMO SUPERO LA PARTE PRACTICA</srai>,inteligencia.aiml
+0,* EVALUA EN ^ JUNIO,*,*,La calificacion de la convocatoria de junio será la media entre la nota de#Newlineteoría y de prácticas:#Newline<srai>COMO HAGO PARA APROBAR LA TEORIA</srai>#Newline<srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>,inteligencia.aiml
+0,* EVALUACION EN ^ JUNIO,*,*,<srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>,inteligencia.aiml
+0,* PRESENTARME EN ^ SEPTIEMBRE,*,*,Si vas a la convocatoria de septiembre#Comma harás un examen único escrito. No habrá#Newlineentrega de prácticas#Comma por lo que dicho examen representará el 100% de tu nota.,inteligencia.aiml
+0,^ ME PRESENTO EN ^ SEPTIEMBRE,*,*,<srai>QUE HAGO SI TENGO QUE PRESENTARME EN SEPTIEMBRE</srai>,inteligencia.aiml
+0,* EXAMEN DE PRACTICAS EN ^ SEPTIEMBRE,*,*,No#Comma sólo se hace un examen escrito,inteligencia.aiml
+0,^ NO PUEDO ASISTIR ^ REGULARMENTE,*,*,En este caso#Comma y sólo por motivos justificados#Comma puedes optar a la evaluación#Newlineúnica final#Comma que consiste en hacr un único examen con preguntas teóricas y#Newlineprácticas,inteligencia.aiml
+0,* NOTA MINIMA PARA APROBAR,*,*,<get name="nombre"/>#Comma necesitas un 3 sobre 10 como mínimo en teoría y en#Newlineprácticas para hacer media,inteligencia.aiml
+0,LAS PRACTICAS SON OBLIGATORIAS,*,*,Por supuesto. Yo soy el resultado de una de ellas,inteligencia.aiml
+0,LA PARTE PRACTICA ES OBLIGATORIA,*,*,<srai>LAS PRACTICAS SON OBLIGATORIAS</srai>,inteligencia.aiml
+0,SON OBLIGATORIAS LAS PRACTICAS,*,*,<srai>LAS PRACTICAS SON OBLIGATORIAS</srai>,inteligencia.aiml
+0,CUANTO * CADA PRACTICA * A LA NOTA FINAL,*,*,Con respecto a la nota final#Comma cada práctica vale aproximadamente 1.12 puntos,inteligencia.aiml
+0,CUANTO * LA PARTICIPACION * A LA NOTA FINAL,*,*,Con respecto a la nota final#Comma la asistencia a practicas vale 0.5 puntos,inteligencia.aiml
+0,CUANTO * CADA GUION * A LA NOTA FINAL,*,*,<srai>CUANTO VALE CADA PRACTICA CON RESPECTO A LA NOTA FINAL</srai>,inteligencia.aiml
+0,COMO * PUNTOS * PARTICIPACION,*,*,Asistiendo a los seminarios. Quizás te ayude mostrar un poco de atención,inteligencia.aiml
+0,QUE ^ MINIMO ^ PARA APROBAR ^,*,*,Necesitas una nota media mayor o igual a 5#Comma siempre que ambas partes tengan más#Newlinede un 3 como calificación,inteligencia.aiml
+0,LOS TRABAJOS SON INDIVIDUALES,*,*,Los trabajos sólo se pueden realizar de forma individual. En otro caso#Comma serás#Newlineamablemente enviado a septiembre,inteligencia.aiml
+0,LAS PRACTICAS SON INDIVIDUALES,*,*,<srai>LOS TRABAJOS SON INDIVIDUALES</srai>,inteligencia.aiml
+0,* LAS PRACTICAS * INDIVIDUAL,*,*,<srai>LOS TRABAJOS SON INDIVIDUALES</srai>,inteligencia.aiml
+0,* INDIVIDUAL LAS PRACTICAS,*,*,<srai>LOS TRABAJOS SON INDIVIDUALES</srai>,inteligencia.aiml
+0,* HACER LOS TRABAJOS EN GRUPO,*,*,<srai>LOS TRABAJOS SON INDIVIDUALES</srai>,inteligencia.aiml
+0,* HACER LAS PRACTICAS EN GRUPO,*,*,<srai>LOS TRABAJOS SON INDIVIDUALES</srai>,inteligencia.aiml
+0,* ENTREGAR LOS EJERCICIOS * RELACIONES ^,*,*,Los ejercicios de las relaciones deben entregarse en el plazo acordado#Comma #Newliney cuentan en la nota de teoría,inteligencia.aiml
+0,POR QUE TENGO QUE ESTUDIAR,*,*,<get name="nombre"/>#Comma <get name="nombre"/>#Comma <get name="nombre"/>... Ya eres#Newlinemayorcito para hacerte estas preguntas. A no ser que quieras trabajar en#NewlineTelecinco#Comma vas a tener que estudiar en esta vida para llegar a ser una persona#Newlinede provecho,inteligencia.aiml
+0,CUANTO * EL PRIMER EXAMEN * TEORIA,*,*,Vale 0.5 puntos como máximo#Comma que se añadirán al examen final,inteligencia.aiml
+0,CUANTO * EL PRIMER EXAMEN * TEORICO,*,*,<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>,inteligencia.aiml
+0,* TENER UNA NOTA * A 10,*,*,Puedes tener una nota superior a 10#Comma <get name="nombre"/>. Aunque en tu#Newlineexpediente el máximo es#Comma como siempre#Comma de 10.,inteligencia.aiml
+0,* RECUPERAR * PRACTICA ^,*,*,No. La única recuperación posible será en septiembre#Comma en caso de que acabes#Newlinesuspendiendo la asignatura,inteligencia.aiml
+0,* RECUPERAR * EXAMEN ^,*,*,<srai>SE PUEDE RECUPERAR UNA PRACTICA</srai>,inteligencia.aiml
+0,^ SI ME COPIO DE * ESTUDIANTE ^,*,*,Nada bueno#Comma <get name="nombre"/>. ¿Conoces el cuarto con cocodrilos que hay en#Newlineel sótano de la ETSIIT? Probablemente sólo te envíen a septiembre#Comma pero tenlo en#Newlinecuenta,inteligencia.aiml
+0,^ SI ME DEJO COPIAR ^,*,*,Es tan malo copiar como dejarse copiar. Irás a septiembre#Comma aunque al menos#Newlineirás acompañado de tu amigo,inteligencia.aiml
+0,^ DEJO QUE SE COPIEN DE MI ^,*,*,<srai>QUE PASA SI ME DEJO COPIAR</srai>,inteligencia.aiml
+0,* SI SUSPENDO ^ JUNIO,*,*,Podrás volver a presentarte en la convocatoria de septiembre. ¿Quieres conocer#Newlineel metodo de evaluacion en tal caso?,inteligencia.aiml
+0,SI,^ METODO DE EVALUACION EN TAL CASO,*,<srai>QUE PASA SI ME PRESENTO EN SEPTIEMBRE</srai>,inteligencia.aiml
+0,CUANTO * LA ^ PRACTICA Y LA ^ TEORIA,*,*,Ambas representan#Comma por cada lado#Comma el 50% de tu nota final,inteligencia.aiml
+0,* TUTORIAS * PROFESOR DE PRACTICAS,*,*,Si tu profesor de prácticas es Juan Fernández#Comma su horario de tutorías es:#Newline|--------|------------------|-----------|#Newline|  DIA   |     HORARIO      |   LUGAR   |#Newline|--------|------------------|-----------|#Newline| Martes | de 10:00 a 13:00 | Despacho  |#Newline|--------|------------------|	 24     |#Newline| Jueves | de 10:00 a 13:00 |  ETSIIT   |#Newline|--------|------------------|-----------|,inteligencia.aiml
+0,* EL CORREO ^ PROFESOR DE TEORIA,*,*,Si tu profesor de teoría es Miguel Delgado#Comma su correo es:#Newlinemdelgado@decsai.ugr.es,inteligencia.aiml
+0,* APROBAR LA PARTE PRACTICA ^ SI NO * UNA PRACTICA,*,*,Si#Comma aunque no llegarás a la nota máxima en la parte práctica,inteligencia.aiml
+0,* NOTA MINIMA * PARA HACER MEDIA,*,*,<srai>HAY NOTA MINIMA PARA APROBAR</srai>,inteligencia.aiml
+0,* NOTA MINIMA * PARA ^ HAGAN MEDIA,*,*,<srai>HAY NOTA MINIMA PARA APROBAR</srai>,inteligencia.aiml
+0,QUE ^ OBTENGO EN LA PRACTICA 1 SI * EL NIVEL 3 Y NO LO SUPERO,*,*,Obtendrás una calificación de 5#Comma por lo que debes realizar una sabia decisión#Newlineantes de optar por uno u otro nivel,inteligencia.aiml
+0,* ENTREGAR LA PRACTICA 1 SIN HACER * NIVEL 0,*,*,La puedes entregar#Comma aunque obtendrás la misma calificación que si no la#Newlineentregas. Así que mejor haz el nivel 0 antes de proceder a hacer los demás.,inteligencia.aiml
+0,QUE ^ HACER SI NO PUEDO * DEFENSA * PRACTICA 1 ^,*,*,Si no puedes defender la práctica 1 en la sesión que te corresponde#Comma deberias#Newlinehablar con tu profesor de prácticas#Comma que te asignará otro grupo de prácticas#Newlinepara esa misma semana#Comma donde la podrás defender,inteligencia.aiml
+0,QUE ^ HACER SI NO PUEDO * A DEFENDER * PRACTICA 1 ^,*,*,<srai>QUE PUEDO HACER SI NO PUEDO IR A LA DEFENSA DE LA PRACTICA 1</srai>,inteligencia.aiml
+0,CUANTAS PRUEBAS TEORICAS * CURSO,*,*,Habrá 3 pruebas parciales y un examen final,inteligencia.aiml
+0,CUANTAS PRUEBAS DE TEORIA * CURSO,*,*,<srai>CUANTAS PRUEBAS TEORICAS HABRA A LO LARGO DEL CURSO</srai>,inteligencia.aiml
+0,QUE * LA PRIMERA PRUEBA TEORICA,*,*,<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>,inteligencia.aiml
+0,QUE * LA PRIMERA PRUEBA DE TEORIA,*,*,<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>,inteligencia.aiml
+0,CUANTO * LA PRIMERA PRUEBA TEORICA,*,*,<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>,inteligencia.aiml
+0,CUANTO * LA PRIMERA PRUEBA DE TEORIA,*,*,<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>,inteligencia.aiml
+0,EN * TEORICA ^ CUENTA LA ASISTENCIA,*,*,No#Comma sólo se tendrán en cuenta las pruebas que se realicen de cara a la#Newlinecalificación,inteligencia.aiml
+0,EN LA TEORIA ^ CUENTA LA ASISTENCIA,*,*,No#Comma sólo se tendrán en cuenta las pruebas que se realicen de cara a la#Newlinecalificación,inteligencia.aiml
+0,* EL EXAMEN DE EJERCICIOS,*,*,En dicho examen se realizarán ejercicios parecidos en los desarrollados en las#Newlinesesiones prácticas. Por tanto#Comma tu asistencia es bastante importante de cara a #Newlineeste examen,inteligencia.aiml
+0,^ NO QUIERO DEFENDER * PRACTICA,*,*,Tendrás una calificación igual a la que obtendrías si no la hubieras entregado,inteligencia.aiml
+0,QUE ^ HACER SI NO * SEGURO DE ^ SUPERAR EL NIVEL 3 ^,*,*,Puedes intentar hacer el nivel 2. Obtendrás más calificación que si haces mal el#Newlinenivel 3#Comma y probablemente te sea más fácil,inteligencia.aiml
+0,CUANTAS PRACTICAS *,*,*,En total#Comma hay 3 prácticas entregables en IA,inteligencia.aiml
+0,^ HACER LAS PRACTICAS EN * LENGUAJE ^,*,*,El objetivo es que aprendas a usar AIML#Comma <get name="nombre"/>,inteligencia.aiml
+0,ODIO AIML, PODRIA HACER LAS PRACTICAS CON OTRO LENGUAJE,*,*,<srai>YO PROGRAMO MUY BIEN EN C++#Comma PODRIA HACER LAS PRACTICAS EN ESE LENGUAJE</srai>,inteligencia.aiml
+0,DONDE * LA OFICINA * PROFESOR DE PRACTICAS,*,*,Se encuentra en el despacho 24 de la cuarta planta de la ETSIIT. No tiene #Newlinepérdida,inteligencia.aiml
+0,DONDE * EL DESPACHO * PROFESOR DE PRACTICAS,*,*,<srai>DONDE ESTA LA OFICINA DEL PROFESOR DE PRACTICAS</srai>,inteligencia.aiml
+0,DONDE * EL DESPACHO * PROFESOR DE TEORIA,*,*,Se encuentra en el despacho 36 de la cuarta planta de la ETSIIT. ¡Al lado del de#Newlineprácticas!,inteligencia.aiml
+0,DONDE * LA OFICINA * PROFESOR DE TEORIA,*,*,<srai>DONDE ESTA EL DESPACHO DEL PROFESOR DE TEORIA</srai>,inteligencia.aiml
+0,SUMO * PUNTOS EN LAS PRACTICAS * APROBAR LAS PRACTICAS,*,*,Para aprobar las prácticas#Comma debes tener al menos un 5 de media en todas las#Newlinepartes,inteligencia.aiml
+0,SUMO * PUNTOS EN LAS PRACTICAS * APROBAR LA ASIGNATURA,*,*,<srai>COMO APROBAR LA TEORIA</srai>,inteligencia.aiml
+0,ME INCORPORE TARDE ^ NO PUDE HACER LA PRACTICA ^ APROBAR LA PARTE PRACTICA,*,*,<srai>ME INCORPORE TARDE A LA ASIGNATURA Y NO PUDE HACER LA PRACTICA 1#Comma PUEDO RECUPERAR ESA PRACTICA</srai>,inteligencia.aiml
+0,ME INCORPORE TARDE ^ NO PUDE HACER LA PRACTICA ^ APROBAR LAS PRACTICAS,*,*,<srai>ME INCORPORE TARDE A LA ASIGNATURA Y NO PUDE HACER LA PRACTICA 1#Comma PUEDO RECUPERAR ESA PRACTICA</srai>,inteligencia.aiml
+0,* AGENTES CONVERSACIONALES * DEFENSA DE ^ PRACTICAS,*,*,No#Comma <get name="nombre"/>#Comma desgraciadamente no,inteligencia.aiml
+0,* SIGUIENTES PRACTICAS * PROGRAMAR,*,*,Me temo que sí. Para algo estamos aquí! :D,inteligencia.aiml
+0,^ LA PRACTICA SE COMPLICA ^,*,*,Depende del empeño que le pongas#Comma <get name="nombre"/>,inteligencia.aiml
+0,DONDE ESTA ^,*,*,<think><set name="topic">lugares</set></think>#NewlineSólo puedo responderte a preguntas sobre esta asignatura y este grupo. Quieres#Newlinepreguntarme sobre la situacion de un despacho?,inteligencia.aiml
+0,^ EVALUACION ^,*,*,<srai>COMO SE EVALUA EN LA CONVOCATORIA DE JUNIO</srai>#Newline<srai>QUE PASA SI TENGO QUE PRESENTARME EN LA CONVOCATORIA DE SEPTIEMBRE</srai>,inteligencia.aiml
+0,* CALCULA * NOTA,*,*,<srai>EVALUACION</srai>,inteligencia.aiml
+0,* APRUEBO LA TEORIA,*,*,<srai>COMO APROBAR TEORIA</srai>,inteligencia.aiml
+0,* APRUEBO LA PARTE TEORICA,*,*,<srai>COMO APROBAR TEORIA</srai>,inteligencia.aiml
+0,*,*,*,No he entendido tu pregunta. Prueba a preguntarla de otro modo,inteligencia.aiml

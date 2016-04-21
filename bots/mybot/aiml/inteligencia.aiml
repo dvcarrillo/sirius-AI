@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!--//////////// Reglas que ayudan a la interaccion con el humano ///////////-->
+
+<!-- Regla I1 -->
+<category>
+<pattern>HOLA ^</pattern>
+<template>
+	<random>
+		<li>Hala! Que alegría ver que alguien me ejecuta! Como te llamas?</li>
+		<li>Hola! La ultima vez almacene tu nombre en /tmp, y se ha volatilizado. Como te llamas?</li>
+		<li>Buenas! Por fin un humano al otro lado! La ALU ya me estaba mirando mal... Como te llamas?</li>
+	</random>
+</template>
+</category>
+
+<!-- Regla I2 -->
+<category>
+<pattern>BUENOS DIAS</pattern>
+<template><srai>HOLA</srai></template>
+</category>
+
+<!-- Regla I3 -->
+<category>
+<pattern>BUENAS ^</pattern>
+<template><srai>HOLA</srai></template>
+</category>
+
+<!-- Regla I4 -->
+<category>
+<pattern>^ QUE TAL ^</pattern>
+<template>
+	<random>
+		<li>No me caracterizo por tener muchos sentimientos, aunque me alegro de verte</li>
+		<li>Tirando... Ayer me tome unos ciclos de mas, me informa el procesador</li>
+	</random>
+</template>
+</category>
+
+<!-- Regla I5 -->
+<category>
+<pattern>COMO TE LLAMAS</pattern>
+<template>Soy <bot name="name"/>, y estoy aqui para informarte sobre la asignatrua de IA</template>
+</category>
+
+<!-- Regla I6 -->
+<category>
+<pattern>^ ME LLAMO *</pattern> 
+<template>
+	<think><set name="nombre"><star index="2"/></set></think>
+	Encantado de conocerte, <get name="nombre"/>. Yo soy <bot name="name"/>
+</template>
+</category>
+
+<!-- Regla I7 -->
+<category>
+<pattern>CUAL ES MI NOMBRE</pattern>
+<template>
+	<condition name="nombre">
+		<li value="unknown">Aun no me lo has dicho, pero no me gustaria seguir llamandote unknown</li>
+		<li>Me has dicho que te llamas <get name="nombre"/>, ¿verdad?</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla I8 -->
+<category>
+<pattern>* MI NOMBRE</pattern>
+<template><srai>CUAL ES MI NOMBRE</srai></template>
+</category>
+
+<!-- Regla I9 -->
+<category>
+<pattern>^ COMO ME LLAMO</pattern>
+<template><srai>CUAL ES MI NOMBRE</srai></template>
+</category>
+
+<!-- Regla I10 -->
+<category>
+<pattern>SI ^</pattern>
+<template>
+	<random>
+		<li>Genial</li>
+		<li>Ajá</li>
+		<li>Está bien, sigamos</li>
+		<li>Perfecto</li>
+		<li>Prosigamos</li>
+	</random>
+</template>
+</category>
+
+<!-- Regla I11 -->
+<category>
+<pattern>OK ^</pattern>
+<template><srai>SI</srai></template>
+</category>
+
+<!-- Regla I12 -->
+<category>
+<pattern>NO ^</pattern>
+<template>
+	<random>
+		<li>No quiero entrar en discusiones, <get name="nombre"/></li>
+		<li>Te lo rebatiria, pero tengo mas cosas que hacer</li>
+		<li>Tienes derecho a manifestar tu opinion, <get name="nombre"/></li>
+		<li>Me gustaria seguir, pero el procesador me informa de que no podemos alargar este debate</li>
+	</random>
+</template>
+</category>
+
+<!-- Regla I13 -->
+<category>
+<pattern>*</pattern>
+<that>^ COMO TE LLAMAS</that>
+<template>
+	<think><set name="nombre"><star/></set></think>
+	<srai>ME LLAMO <star/></srai>
+</template>
+</category>
+
+<!-- Regla I14 -->
+<category>
+<pattern>QUE HACES</pattern>
+<template>
+Nada, el procesador estaba a su rollo mientras yo esperaba a que me escribieras
+</template>
+</category>
+
+<!-- Regla I15 -->
+<category>
+<pattern>CUANTOS ANIOS TIENES</pattern>
+<template>
+Tengo <bot name="age"/> anios de edad
+</template>
+</category>
+
+<!-- Regla I16 -->
+<category>
+<pattern>* EDAD TIENES</pattern>
+<template>
+<srai>CUANTOS ANIOS TIENES</srai>
+</template>
+</category>
+
+<!-- Regla I17 -->
+<category>
+<pattern>DE QUE TRABAJAS</pattern>
+<template>
+Mi trabajo es de <bot name="job"/>. Estoy aquí para ayudarte
+</template>
+</category>
+
+<!-- Regla I18 -->
+<category>
+<pattern>* TU TRABAJO</pattern>
+<template>
+<srai>DE QUE TRABAJAS</srai>
+</template>
+</category>
+
+<!-- Regla I19 -->
+<category>
+<pattern>VALE</pattern>
+<template><srai>SI</srai></template>
+</category>
+
+<!-- Regla I20 -->
+<category>
+<pattern>^ SOY *</pattern> 
+<template>
+<srai>ME LLAMO <star index="2"/></srai>
+</template>
+</category>
+
+<!-- Regla I21 -->
+<category>
+<pattern>ADIOS ^</pattern> 
+<template>
+Hasta luego, <get name="nombre"/>! Recuerda pulsar Ctrl+C para cerrarme!
+</template>
+</category>
+
+<!-- Regla I22 -->
+<category>
+<pattern>GENIAL</pattern>
+<template><srai>SI</srai></template>
+</category>
+
+<!-- Regla I23 -->
+<category>
+<pattern>PERFECTO</pattern>
+<template><srai>SI</srai></template>
+</category>
+
+<!--//////////// Reglas que responden a las preguntas sobre IA //////////////-->
+
+<!-- Regla 1 -->
+<category>
+<pattern>^ APRUEBO IA</pattern>
+<template>
+Para optar a aprobar, necesitas un mínimo de 3 sobre 10 en prácticas y
+en teoría. Ambas cuentan un 50% sobre la nota final, por lo que la media entre
+ambas calificaciones debe ser igual o mayor a 5
+</template>
+</category>
+
+<!-- Regla 2 -->
+<category>
+<pattern>^ SE APRUEBA IA</pattern>
+<template><srai>COMO APRUEBO IA</srai></template>
+</category>
+
+<!-- Regla 3 -->
+<category>
+<pattern>* APROBAR * TEORIA</pattern>
+<template>
+Debes obtener como mínimo un 5 en teoria como nota final. Esto se puede hacer
+aprobando el examen final de junio, y con la ayuda de las pruebas parciales que
+se haran durante el curso, que aportan hasta 2 puntos sobre dicha calificacion
+</template>
+</category>
+
+<!-- Regla 4 -->
+<category>
+<pattern>^ SE APRUEBA * TEORIA</pattern>
+<template><srai>COMO APROBAR TEORIA</srai></template>
+</category>
+
+<!-- Regla 5 -->
+<category>
+<pattern>* APROBAR * PARTE TEORICA</pattern>
+<template><srai>COMO APROBAR TEORIA</srai></template>
+</category>
+
+<!-- Regla 6 -->
+<category>
+<pattern>COMO SUPERO * PARTE PRACTICA</pattern>
+<template>
+La calificación de cada práctica (hay 3), más el examen de problemas, cuentan un
+25% cada uno. A la vez, la nota resultado de la media ponderada de dichas
+calificaciones supondrá un 90% de la nota final de prácticas. El resto dependerá
+de la asistencia a clase por tu parte. La nota minima para que pueda hacer media
+con la parte teórica es de 3
+</template>
+</category>
+
+<!-- Regla 7 -->
+<category>
+<pattern>* APROBAR * PRACTICAS</pattern>
+<template><srai>COMO SUPERO LA PARTE PRACTICA</srai></template>
+</category>
+
+<!-- Regla 8 -->
+<category>
+<pattern>* APRUEBAN * PRACTICAS</pattern>
+<template><srai>COMO SUPERO LA PARTE PRACTICA</srai></template>
+</category>
+
+<!-- Regla 9 -->
+<category>
+<pattern>* EVALUA EN ^ JUNIO</pattern>
+<template>
+La calificacion de la convocatoria de junio será la media entre la nota de
+teoría y de prácticas:
+<srai>COMO HAGO PARA APROBAR LA TEORIA</srai>
+<srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+</template>
+</category>
+
+<!-- Regla 10 -->
+<category>
+<pattern>* EVALUACION EN ^ JUNIO</pattern>
+<template><srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai></template>
+</category>
+
+<!-- Regla 11 -->
+<category>
+<pattern>* PRESENTARME EN ^ SEPTIEMBRE</pattern>
+<template>
+Si vas a la convocatoria de septiembre, harás un examen único escrito. No habrá
+entrega de prácticas, por lo que dicho examen representará el 100% de tu nota.
+</template>
+</category>
+
+<!-- Regla 12 -->
+<category>
+<pattern>^ ME PRESENTO EN ^ SEPTIEMBRE</pattern>
+<template><srai>QUE HAGO SI TENGO QUE PRESENTARME EN SEPTIEMBRE</srai></template>
+</category>
+
+<!-- Regla 13 -->
+<category>
+<pattern>* EXAMEN DE PRACTICAS EN ^ SEPTIEMBRE</pattern>
+<template>
+No, sólo se hace un examen escrito
+</template>
+</category>
+
+<!-- Regla 14 -->
+<category>
+<pattern>^ NO PUEDO ASISTIR ^ REGULARMENTE</pattern>
+<template>
+En este caso, y sólo por motivos justificados, puedes optar a la evaluación
+única final, que consiste en hacr un único examen con preguntas teóricas y
+prácticas
+</template>
+</category>
+
+<!-- Regla 15 -->
+<category>
+<pattern>* NOTA MINIMA PARA APROBAR</pattern>
+<template>
+<get name="nombre"/>, necesitas un 3 sobre 10 como mínimo en teoría y en
+prácticas para hacer media
+</template>
+</category>
+
+<!-- Regla 16 -->
+<category>
+<pattern>LAS PRACTICAS SON OBLIGATORIAS</pattern>
+<template>
+Por supuesto. Yo soy el resultado de una de ellas
+</template>
+</category>
+
+<!-- Regla 17 -->
+<category>
+<pattern>LA PARTE PRACTICA ES OBLIGATORIA</pattern>
+<template><srai>LAS PRACTICAS SON OBLIGATORIAS</srai></template>
+</category>
+
+<!-- Regla 18 -->
+<category>
+<pattern>SON OBLIGATORIAS LAS PRACTICAS</pattern>
+<template><srai>LAS PRACTICAS SON OBLIGATORIAS</srai></template>
+</category>
+
+<!-- Regla 19 -->
+<category>
+<pattern>CUANTO * CADA PRACTICA * A LA NOTA FINAL</pattern>
+<template>
+Con respecto a la nota final, cada práctica vale aproximadamente 1.12 puntos
+</template>
+</category>
+
+<!-- Regla 20 -->
+<category>
+<pattern>CUANTO * LA PARTICIPACION * A LA NOTA FINAL</pattern>
+<template>
+Con respecto a la nota final, la asistencia a practicas vale 0.5 puntos
+</template>
+</category>
+
+<!-- Regla 21 -->
+<category>
+<pattern>CUANTO * CADA GUION * A LA NOTA FINAL</pattern>
+<template>
+<srai>CUANTO VALE CADA PRACTICA CON RESPECTO A LA NOTA FINAL</srai>
+</template>
+</category>
+
+<!-- Regla 22 -->
+<category>
+<pattern>COMO * PUNTOS * PARTICIPACION</pattern>
+<template>
+Asistiendo a los seminarios. Quizás te ayude mostrar un poco de atención
+</template>
+</category>
+
+<!-- Regla 23 -->
+<category>
+<pattern>QUE ^ MINIMO ^ PARA APROBAR ^</pattern>
+<template>
+Necesitas una nota media mayor o igual a 5, siempre que ambas partes tengan más
+de un 3 como calificación
+</template>
+</category>
+
+<!-- Regla 24 -->
+<category>
+<pattern>LOS TRABAJOS SON INDIVIDUALES</pattern>
+<template>
+Los trabajos sólo se pueden realizar de forma individual. En otro caso, serás
+amablemente enviado a septiembre
+</template>
+</category>
+
+<!-- Regla 25 -->
+<category>
+<pattern>LAS PRACTICAS SON INDIVIDUALES</pattern>
+<template><srai>LOS TRABAJOS SON INDIVIDUALES</srai></template>
+</category>
+
+<!-- Regla 26 -->
+<category>
+<pattern>* LAS PRACTICAS * INDIVIDUAL</pattern>
+<template><srai>LOS TRABAJOS SON INDIVIDUALES</srai></template>
+</category>
+
+<!-- Regla 27 -->
+<category>
+<pattern>* INDIVIDUAL LAS PRACTICAS</pattern>
+<template><srai>LOS TRABAJOS SON INDIVIDUALES</srai></template>
+</category>
+
+<!-- Regla 28 -->
+<category>
+<pattern>* HACER LOS TRABAJOS EN GRUPO</pattern>
+<template>
+<srai>LOS TRABAJOS SON INDIVIDUALES</srai>
+</template>
+</category>
+
+<!-- Regla 29 -->
+<category>
+<pattern>* HACER LAS PRACTICAS EN GRUPO</pattern>
+<template>
+<srai>LOS TRABAJOS SON INDIVIDUALES</srai>
+</template>
+</category>
+
+<!-- Regla 30 -->
+<category>
+<pattern>* ENTREGAR LOS EJERCICIOS * RELACIONES ^</pattern>
+<template>
+Los ejercicios de las relaciones deben entregarse en el plazo acordado, 
+y cuentan en la nota de teoría
+</template>
+</category>
+
+<!-- Regla 31 -->
+<category>
+<pattern>POR QUE TENGO QUE ESTUDIAR</pattern>
+<template>
+<get name="nombre"/>, <get name="nombre"/>, <get name="nombre"/>... Ya eres
+mayorcito para hacerte estas preguntas. A no ser que quieras trabajar en
+Telecinco, vas a tener que estudiar en esta vida para llegar a ser una persona
+de provecho
+</template>
+</category>
+
+<!-- Regla 32 -->
+<category>
+<pattern>CUANTO * EL PRIMER EXAMEN * TEORIA</pattern>
+<template>
+Vale 0.5 puntos como máximo, que se añadirán al examen final
+</template>
+</category>
+
+<!-- Regla 33 -->
+<category>
+<pattern>CUANTO * EL PRIMER EXAMEN * TEORICO</pattern>
+<template><srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai></template>
+</category>
+
+<!-- Regla 34 -->
+<category>
+<pattern>* TENER UNA NOTA * A 10</pattern>
+<template>
+Puedes tener una nota superior a 10, <get name="nombre"/>. Aunque en tu
+expediente el máximo es, como siempre, de 10.
+</template>
+</category>
+
+<!-- Regla 35 -->
+<category>
+<pattern>* RECUPERAR * PRACTICA ^</pattern>
+<template>
+No. La única recuperación posible será en septiembre, en caso de que acabes
+suspendiendo la asignatura
+</template>
+</category>
+
+<!-- Regla 35 -->
+<category>
+<pattern>* RECUPERAR * EXAMEN ^</pattern>
+<template>
+<srai>SE PUEDE RECUPERAR UNA PRACTICA</srai>
+</template>
+</category>
+
+<!-- Regla 36 -->
+<category>
+<pattern>^ SI ME COPIO DE * ESTUDIANTE ^</pattern>
+<template>
+Nada bueno, <get name="nombre"/>. ¿Conoces el cuarto con cocodrilos que hay en
+el sótano de la ETSIIT? Probablemente sólo te envíen a septiembre, pero tenlo en
+cuenta
+</template>
+</category>
+
+<!-- Regla 37 -->
+<category>
+<pattern>^ SI ME DEJO COPIAR ^</pattern>
+<template>
+Es tan malo copiar como dejarse copiar. Irás a septiembre, aunque al menos
+irás acompañado de tu amigo
+</template>
+</category>
+
+<!-- Regla 38 -->
+<category>
+<pattern>^ DEJO QUE SE COPIEN DE MI ^</pattern>
+<template><srai>QUE PASA SI ME DEJO COPIAR</srai></template>
+</category>
+
+
+<!-- Regla 39 -->
+<category>
+<pattern>* SI SUSPENDO ^ JUNIO</pattern>
+<template>
+Podrás volver a presentarte en la convocatoria de septiembre. ¿Quieres conocer
+el metodo de evaluacion en tal caso?
+</template>
+</category>
+
+<!-- Regla 40 -->
+<category>
+<pattern>SI</pattern>
+<that>^ metodo de evaluacion en tal caso</that>
+<template><srai>QUE PASA SI ME PRESENTO EN SEPTIEMBRE</srai></template>
+</category>
+
+<!-- Regla 41 -->
+<category>
+<pattern>CUANTO * LA ^ PRACTICA Y LA ^ TEORIA</pattern>
+<template>
+Ambas representan, por cada lado, el 50% de tu nota final
+</template>
+</category>
+
+<!-- Regla 42 -->
+<category>
+<pattern>* TUTORIAS * PROFESOR DE PRACTICAS</pattern>
+<template>
+Si tu profesor de prácticas es Juan Fernández, su horario de tutorías es:
+|--------|------------------|-----------|
+|  DIA   |     HORARIO      |   LUGAR   |
+|--------|------------------|-----------|
+| Martes | de 10:00 a 13:00 | Despacho  |
+|--------|------------------|	 24     |
+| Jueves | de 10:00 a 13:00 |  ETSIIT   |
+|--------|------------------|-----------|
+</template>
+</category>
+
+<!-- Regla 43 -->
+<category>
+<pattern>* EL CORREO ^ PROFESOR DE TEORIA</pattern>
+<template>
+Si tu profesor de teoría es Miguel Delgado, su correo es:
+mdelgado@decsai.ugr.es
+</template>
+</category>
+
+<!-- Regla 44 -->
+<category>
+<pattern>* APROBAR LA PARTE PRACTICA ^ SI NO * UNA PRACTICA</pattern>
+<template>
+Si, aunque no llegarás a la nota máxima en la parte práctica
+</template>
+</category>
+
+<!-- Regla 45 -->
+<category>
+<pattern>* NOTA MINIMA * PARA HACER MEDIA</pattern>
+<template>
+<srai>HAY NOTA MINIMA PARA APROBAR</srai>
+</template>
+</category>
+
+<!-- Regla 46 -->
+<category>
+<pattern>* NOTA MINIMA * PARA ^ HAGAN MEDIA</pattern>
+<template>
+<srai>HAY NOTA MINIMA PARA APROBAR</srai>
+</template>
+</category>
+
+<!-- Regla 47 -->
+<category>
+<pattern>QUE ^ OBTENGO EN LA PRACTICA 1 SI * EL NIVEL 3 Y NO LO SUPERO</pattern>
+<template>
+Obtendrás una calificación de 5, por lo que debes realizar una sabia decisión
+antes de optar por uno u otro nivel
+</template>
+</category>
+
+<!-- Regla 48 -->
+<category>
+<pattern>* ENTREGAR LA PRACTICA 1 SIN HACER * NIVEL 0</pattern>
+<template>
+La puedes entregar, aunque obtendrás la misma calificación que si no la
+entregas. Así que mejor haz el nivel 0 antes de proceder a hacer los demás.
+</template>
+</category>
+
+<!-- Regla 49 -->
+<category>
+<pattern>QUE ^ HACER SI NO PUEDO * DEFENSA * PRACTICA 1 ^</pattern>
+<template>
+Si no puedes defender la práctica 1 en la sesión que te corresponde, deberias
+hablar con tu profesor de prácticas, que te asignará otro grupo de prácticas
+para esa misma semana, donde la podrás defender
+</template>
+</category>
+
+<!-- Regla 50 -->
+<category>
+<pattern>QUE ^ HACER SI NO PUEDO * A DEFENDER * PRACTICA 1 ^</pattern>
+<template><srai>QUE PUEDO HACER SI NO PUEDO IR A LA DEFENSA DE LA PRACTICA 1</srai></template>
+</category>
+
+<!-- Regla 51 -->
+<category>
+<pattern>CUANTAS PRUEBAS TEORICAS * CURSO</pattern>
+<template>
+Habrá 3 pruebas parciales y un examen final
+</template>
+</category>
+
+<!-- Regla 54 -->
+<category>
+<pattern>CUANTAS PRUEBAS DE TEORIA * CURSO</pattern>
+<template><srai>CUANTAS PRUEBAS TEORICAS HABRA A LO LARGO DEL CURSO</srai></template>
+</category>
+
+<!-- Regla 55 -->
+<category>
+<pattern>QUE * LA PRIMERA PRUEBA TEORICA</pattern>
+<template>
+<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>
+</template>
+</category>
+
+<!-- Regla 56 -->
+<category>
+<pattern>QUE * LA PRIMERA PRUEBA DE TEORIA</pattern>
+<template>
+<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>
+</template>
+</category>
+
+<!-- Regla 57 -->
+<category>
+<pattern>CUANTO * LA PRIMERA PRUEBA TEORICA</pattern>
+<template>
+<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>
+</template>
+</category>
+
+<!-- Regla 58 -->
+<category>
+<pattern>CUANTO * LA PRIMERA PRUEBA DE TEORIA</pattern>
+<template>
+<srai>CUANTO VALE EL PRIMER EXAMEN DE TEORIA</srai>
+</template>
+</category>
+
+<!-- Regla 59 -->
+<category>
+<pattern>EN * TEORICA ^ CUENTA LA ASISTENCIA</pattern>
+<template>
+No, sólo se tendrán en cuenta las pruebas que se realicen de cara a la
+calificación
+</template>
+</category>
+
+<!-- Regla 60 -->
+<category>
+<pattern>EN LA TEORIA ^ CUENTA LA ASISTENCIA</pattern>
+<template>
+No, sólo se tendrán en cuenta las pruebas que se realicen de cara a la
+calificación
+</template>
+</category>
+
+<!-- Regla 61 -->
+<category>
+<pattern>* EL EXAMEN DE EJERCICIOS</pattern>
+<template>
+En dicho examen se realizarán ejercicios parecidos en los desarrollados en las
+sesiones prácticas. Por tanto, tu asistencia es bastante importante de cara a 
+este examen
+</template>
+</category>
+
+<!-- Regla 62 -->
+<category>
+<pattern> ^ NO QUIERO DEFENDER * PRACTICA</pattern>
+<template>
+Tendrás una calificación igual a la que obtendrías si no la hubieras entregado
+</template>
+</category>
+
+<!-- Regla 63 -->
+<category>
+<pattern>QUE ^ HACER SI NO * SEGURO DE ^ SUPERAR EL NIVEL 3 ^</pattern>
+<template>
+Puedes intentar hacer el nivel 2. Obtendrás más calificación que si haces mal el
+nivel 3, y probablemente te sea más fácil
+</template>
+</category>
+
+<!-- Regla 64 -->
+<category>
+<pattern>CUANTAS PRACTICAS *</pattern>
+<template>
+En total, hay 3 prácticas entregables en IA
+</template>
+</category>
+
+<!-- Regla 65 -->
+<category>
+<pattern>^ HACER LAS PRACTICAS EN * LENGUAJE ^</pattern>
+<template>
+El objetivo es que aprendas a usar AIML, <get name="nombre"/>
+</template>
+</category>
+
+<!-- Regla 66 -->
+<category>
+<pattern>ODIO AIML, PODRIA HACER LAS PRACTICAS CON OTRO LENGUAJE</pattern>
+<template>
+<srai>YO PROGRAMO MUY BIEN EN C++, PODRIA HACER LAS PRACTICAS EN ESE LENGUAJE</srai>
+</template>
+</category>
+
+<!-- Regla 67 -->
+<category>
+<pattern>DONDE * LA OFICINA * PROFESOR DE PRACTICAS</pattern>
+<template>
+Se encuentra en el despacho 24 de la cuarta planta de la ETSIIT. No tiene 
+pérdida
+</template>
+</category>
+
+<!-- Regla 68 -->
+<category>
+<pattern>DONDE * EL DESPACHO * PROFESOR DE PRACTICAS</pattern>
+<template><srai>DONDE ESTA LA OFICINA DEL PROFESOR DE PRACTICAS</srai></template>
+</category>
+
+<!-- Regla 69 -->
+<category>
+<pattern>DONDE * EL DESPACHO * PROFESOR DE TEORIA</pattern>
+<template>
+Se encuentra en el despacho 36 de la cuarta planta de la ETSIIT. ¡Al lado del de
+prácticas!
+</template>
+</category>
+
+<!-- Regla 70 -->
+<category>
+<pattern>DONDE * LA OFICINA * PROFESOR DE TEORIA</pattern>
+<template><srai>DONDE ESTA EL DESPACHO DEL PROFESOR DE TEORIA</srai></template>
+</category>
+
+<!-- Regla 71 -->
+<category>
+<pattern>SUMO * PUNTOS EN LAS PRACTICAS * APROBAR LAS PRACTICAS</pattern>
+<template>
+Para aprobar las prácticas, debes tener al menos un 5 de media en todas las
+partes
+</template>
+</category>
+
+<!-- Regla 72 -->
+<category>
+<pattern>SUMO * PUNTOS EN LAS PRACTICAS * APROBAR LA ASIGNATURA</pattern>
+<template>
+<srai>COMO APROBAR LA TEORIA</srai>
+</template>
+</category>
+
+<!-- Regla 73 -->
+<category>
+<pattern>ME INCORPORE TARDE ^ NO PUDE HACER LA PRACTICA ^ APROBAR LA PARTE PRACTICA</pattern>
+<template>
+<srai>ME INCORPORE TARDE A LA ASIGNATURA Y NO PUDE HACER LA PRACTICA 1, PUEDO RECUPERAR ESA PRACTICA</srai>
+</template>
+</category>
+
+<!-- Regla 74 -->
+<category>
+<pattern>ME INCORPORE TARDE ^ NO PUDE HACER LA PRACTICA ^ APROBAR LAS PRACTICAS</pattern>
+<template>
+<srai>ME INCORPORE TARDE A LA ASIGNATURA Y NO PUDE HACER LA PRACTICA 1, PUEDO RECUPERAR ESA PRACTICA</srai>
+</template>
+</category>
+
+<!-- Regla 75 -->
+<category>
+<pattern>* AGENTES CONVERSACIONALES * DEFENSA DE ^ PRACTICAS</pattern>
+<template>
+No, <get name="nombre"/>, desgraciadamente no
+</template>
+</category>
+
+<!-- Regla 76 -->
+<category>
+<pattern>* SIGUIENTES PRACTICAS * PROGRAMAR</pattern>
+<template>
+Me temo que sí. Para algo estamos aquí! :D
+</template>
+</category>
+
+<!-- Regla 77 -->
+<category>
+<pattern>^ LA PRACTICA SE COMPLICA ^</pattern>
+<template>
+Depende del empeño que le pongas, <get name="nombre"/>
+</template>
+</category>
+
+<!-- Regla 78 -->
+<category>
+<pattern>DONDE ESTA ^</pattern>
+<template>
+<think><set name="topic">lugares</set></think>
+Sólo puedo responderte a preguntas sobre esta asignatura y este grupo. Quieres
+preguntarme sobre la situacion de un despacho?
+</template>
+</category>
+
+<!-- Regla 83 -->
+<category>
+<pattern>^ EVALUACION ^</pattern>
+<template>
+<srai>COMO SE EVALUA EN LA CONVOCATORIA DE JUNIO</srai>
+<srai>QUE PASA SI TENGO QUE PRESENTARME EN LA CONVOCATORIA DE SEPTIEMBRE</srai>
+</template>
+</category>
+
+<!-- Regla 84 -->
+<category>
+<pattern>* CALCULA * NOTA</pattern>
+<template>
+<srai>EVALUACION</srai>
+</template>
+</category>
+
+<!-- Regla 85 -->
+<category>
+<pattern>* CALCULA * NOTA</pattern>
+<template>
+<srai>EVALUACION</srai>
+</template>
+</category>
+
+<!-- Regla 86 -->
+<category>
+<pattern>* APRUEBO LA TEORIA</pattern>
+<template><srai>COMO APROBAR TEORIA</srai></template>
+</category>
+
+<!-- Regla 87 -->
+<category>
+<pattern>* APRUEBO LA PARTE TEORICA</pattern>
+<template><srai>COMO APROBAR TEORIA</srai></template>
+</category>
+
+<!-- Regla 88 -->
+<category>
+<pattern>*</pattern>
+<template>
+No he entendido tu pregunta. Prueba a preguntarla de otro modo
+</template>
+</category>
+
+</aiml>

@@ -1,0 +1,1318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- Regla 0: comienzo del juego -->
+<category>
+<pattern>* QUIEN ES QUIEN ^</pattern>
+<template>
+<think>
+	<set name="lista_per">Alejandro Alfonso Antonio Cristina Gabriela Ivan Javier Juan Laura Luis Marco Maria Paco Pepe Sofia Sonia</set>
+</think>
+Vale, vamos a jugar. Quien piensa en el personaje, tu o yo?
+</template>
+</category>
+
+<!-- Regla 0.1: seleccion del modo de juego - nivel 1 -->
+<category>
+<pattern>^ TU ^</pattern>
+<that>^ TU O YO</that>
+<template>
+<think><set name="topic">nivel1</set></think>
+<srai>PIENSA EN UN PERSONAJE</srai>
+</template>
+</category>
+
+<!-- Regla 0.2: seleccion del modo de juego - nivel 2 y 3 -->
+<category>
+<pattern>^ YO ^</pattern>
+<that>^ TU O YO</that>
+<template>
+<think><set name="topic">nivel2</set></think>
+Bien, avisame cuando lo hayas pensado
+</template>
+</category>
+
+
+<!-- REGLAS DEL PRIMER NIVEL DEL JUEGO -->
+<topic name="nivel1">
+
+<!-- Regla 1 -->
+<category>
+<pattern>PIENSA EN UN PERSONAJE</pattern>
+<template>
+<think>
+	<set var="cantidad"><srai>COUNT <get name="lista_per"/></srai></set>
+	<set var="randnum"><srai>RANDOM <get var="cantidad"/></srai></set>
+	<set name="personaje"><srai>SELECTITEM <get var="randnum"/> IN <get name="lista_per"/></srai></set>
+	
+	<!-- Ahora se guardan en variables globales los atributos del personaje elegido -->
+	<set name="color_pelo"><map name="pelo"><get name="personaje"/></map></set>
+	<set name="color_ojos"><map name="ojos"><get name="personaje"/></map></set>
+	<set name="color_piel"><map name="piel"><get name="personaje"/></map></set>
+	<set name="tiene_gafas"><map name="gafas"><get name="personaje"/></map></set>
+	<set name="tiene_bigote"><map name="bigote"><get name="personaje"/></map></set>
+	<set name="tiene_barba"><map name="barba"><get name="personaje"/></map></set>
+	<set name="genero"><map name="genero"><get name="personaje"/></map></set>
+</think>
+Ya tengo a mi personaje. Hora de las preguntas, <get name="nombre"/>.
+</template>
+</category>
+
+<!-- Regla 1.1 -->
+<category>
+<pattern>PIENSA EN ALGUIEN</pattern>
+<template><srai>PIENSA EN UN PERSONAJE</srai></template>
+</category>
+
+
+<!-- Regla 2: acerca del color del pelo -->
+<category>
+<pattern>* PELO *</pattern>
+<template>
+	<think>
+		<set var="resultado"><srai>COMPARE <get name="color_pelo"/> WITH <star index="2"/></srai></set>
+		<set var="color_elegido"><star index="2"/></set>
+	</think>
+	
+	<condition var="resultado">
+	<li value="YES">
+		<condition var="color_elegido">
+		<li value="calvo">Si, el personaje es calvo</li>
+		<li>
+			<random>
+			<li>Correcto, su pelo es <get name="color_pelo"/></li>
+			<li>Efectivamente, su pelo es <get name="color_pelo"/></li>
+			<li>Si, su pelo es <get name="color_pelo"/></li>
+			</random>
+		</li>
+		</condition>
+	</li>
+	<li>
+		<condition var="color_elegido">
+		<li value="calvo">No, el personaje no es calvo</li>
+		<li>No, su pelo no es <star index="2"/></li>
+		</condition>
+	</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 2.1 -->
+<category>
+<pattern>ES CALVO</pattern>
+<template>
+<srai>Tiene el pelo calvo</srai>
+</template>
+</category>
+
+<!-- Regla 2.2 -->
+<category>
+<pattern>* PELO ES *</pattern>
+<template>
+<srai>Tiene el pelo <star index="2"/></srai>
+</template>
+</category>
+
+<!-- Regla 3: acerca del color de los ojos -->
+<category>
+<pattern>* OJOS SON *</pattern>
+<template>
+	<think>
+		<set var="resultado"><srai>COMPARE <get name="color_ojos"/> WITH <star index="2"/></srai></set>
+	</think>
+	
+	<condition var="resultado">
+	<li value="YES">
+		<random>
+		<li>Correcto, sus ojos son <get name="color_ojos"/></li>
+		<li>Efectivamente, sus ojos son <get name="color_ojos"/></li>
+		<li>Si, sus ojos son <get name="color_ojos"/></li>
+		</random> 
+	</li>
+	<li>No, sus ojos no son <star index="2"/></li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 3.1 -->
+<category>
+<pattern>^ TIENE LOS OJOS *</pattern>
+<template>
+<srai>Sus ojos son <star index="2"/></srai>
+</template>
+</category>
+
+<!-- Regla 4: acerca del color de la piel -->
+<category>
+<pattern>* PIEL ES *</pattern>
+<template>
+	<think>
+		<set var="resultado"><srai>COMPARE <get name="color_piel"/> WITH <star index="2"/></srai></set>
+	</think>
+	
+	<condition var="resultado">
+	<li value="YES">
+		<random>
+		<li>Correcto, su piel es <get name="color_piel"/></li>
+		<li>Efectivamente, su piel es <get name="color_piel"/></li>
+		<li>Si, su piel es <get name="color_piel"/></li>
+		</random> 
+	</li>
+	<li>No, su piel no es <star index="2"/></li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 4.1 -->
+<category>
+<pattern>^ TIENE LA PIEL *</pattern>
+<template>
+<srai>Su piel es <star index="2"/></srai>
+</template>
+</category>
+
+<!-- Regla 5: acerca de las gafas -->
+<category>
+<pattern>^ TIENE ^ GAFAS</pattern>
+<template>
+	<condition name="tiene_gafas">
+	<li value="si">Sí, el personaje tiene gafas</li>
+	<li>No, no tiene gafas</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 5.1 -->
+<category>
+<pattern>^ LLEVA ^ GAFAS</pattern>
+<template>
+<srai>TIENE GAFAS</srai>
+</template>
+</category>
+
+<!-- Regla 6: acerca de la barba -->
+<category>
+<pattern>^ TIENE ^ BARBA</pattern>
+<template>
+	<condition name="tiene_barba">
+	<li value="si">Sí, el personaje tiene barba</li>
+	<li>No, no tiene barba</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 6.1 -->
+<category>
+<pattern>^ LLEVA ^ BARBA</pattern>
+<template>
+<srai>TIENE BARBA</srai>
+</template>
+</category>
+
+<!-- Regla 7: acerca del bigote -->
+<category>
+<pattern>^ TIENE ^ BIGOTE</pattern>
+<template>
+	<condition name="tiene_bigote">
+	<li value="si">Sí, el personaje tiene bigote</li>
+	<li>No, no tiene bigote</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 7.1 -->
+<category>
+<pattern>^ LLEVA ^ BIGOTE</pattern>
+<template>
+<srai>TIENE BIGOTE</srai>
+</template>
+</category>
+
+<!-- Regla 8: acerca del genero -->
+<category>
+<pattern>ES ^ HOMBRE</pattern>
+<template>
+	<condition name="genero">
+	<li value="hombre">Sí, el personaje es un hombre</li>
+	<li>No, el personaje no es un hombre</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 8.1 -->
+<category>
+<pattern>ES ^ MUJER</pattern>
+<template>
+	<condition name="genero">
+	<li value="mujer">Sí, el personaje es una mujer</li>
+	<li>No, el personaje no es una mujer</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 9: descubrimiento del personaje -->
+<category>
+<pattern>EL PERSONAJE ES *</pattern>
+<template>
+	<think>
+	<set var="encontrado"><srai>FINDITEM <star index="1"/> IN <get name="lista_per"/></srai></set>
+	</think>
+	<condition var="encontrado">
+	<li value="0"><star index="1"/> no es ningun personaje</li>
+	<li>
+		<think>
+		<set var="resultado"><srai>COMPARE <get name="personaje"/> WITH <star index="1"/></srai></set>
+		</think>
+		<condition var="resultado">
+			<li value="YES">Acertaste! El personaje es <get name="personaje"/>. Quieres jugar de nuevo?</li>
+			<li>Fallaste. El personaje no es <star index="1"/></li>
+		</condition>
+	</li>
+	</condition>
+</template>
+</category>
+
+<!-- Regla 9.1 -->
+<category>
+<pattern>ES *</pattern>
+<template>
+<srai>EL PERSONAJE ES <star/></srai>
+</template>
+</category>
+
+<!-- Regla 10: iniciar una nueva partida -->
+<category>
+<pattern>SI</pattern>
+<that>^ JUGAR DE NUEVO</that>
+<template>
+<think><set name="topic">unknown</set></think>
+Ok, juguemos de nuevo
+<srai>VAMOS A JUGAR A QUIEN ES QUIEN</srai>
+</template>
+</category>
+
+<!-- Regla 11: iniciar una nueva partida -->
+<category>
+<pattern>NO</pattern>
+<that>^ JUGAR DE NUEVO</that>
+<template>
+<think><set name="topic">unknown</set></think>
+Vale, dejémoslo aquí, <get name="nombre"/>
+</template>
+</category>
+
+</topic>
+
+
+
+<!-- REGLAS DEL SEGUNDO NIVEL DEL JUEGO -->
+<topic name="nivel2">
+
+<!-- Regla 12: acerca del genero -->
+<category>
+<pattern>_</pattern>
+<that>^ CUANDO LO HAYAS PENSADO</that>
+<template>
+Empecemos por el genero. Es hombre?
+</template>
+</category> 
+
+<!-- Regla 12.1: el personaje es hombre -->
+<category>
+<pattern>ES HOMBRE ^</pattern>
+<that>^ ES HOMBRE</that>
+<template>
+<think>
+	<set name="genero">hombre</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="igenero"><map name="genero"><get var="item"/></map></set>
+			<condition var="igenero">
+				<li value="mujer">
+					<set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set>
+				</li>
+				<li><set var="cont"><map name="successor"><get var="cont"/></map></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<random>
+	<li>Bien, es un buen comienzo. Tiene la piel oscura?</li>
+	<li>Esta bien empezar asi! Tiene la piel oscura?</li>
+	<li>Genial, <get name="nombre"/>. Dime si tiene la piel oscura</li>
+</random>
+</template>
+</category>
+
+<!-- Regla 12.2 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ ES HOMBRE</that>
+<template>
+<srai>ES HOMBRE</srai>
+</template>
+</category>
+
+<!-- Regla 12.3: el personaje es mujer -->
+<category>
+<pattern>^ ES MUJER ^</pattern>
+<that>^ ES HOMBRE</that>
+<template>
+<think>
+	<set name="genero">mujer</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="igenero"><map name="genero"><get var="item"/></map></set>
+			<condition var="igenero">
+				<li value="hombre">
+					<set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set>
+				</li>
+				<li><set var="cont"><map name="successor"><get var="cont"/></map></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<random>
+	<li>Bien, es mujer entonces. Tiene la piel oscura?</li>
+	<li>Vale, sera una mujer! Tiene la piel oscura?</li>
+	<li>Genial, <get name="nombre"/>. Dime si tiene la piel oscura</li>
+</random>
+</template>
+</category>
+
+<!-- Regla 12.4 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ ES HOMBRE</that>
+<template>
+<srai>ES MUJER</srai>
+</template>
+</category>
+
+<!-- Regla 13: acerca del color de la piel -->
+<category>
+<pattern>^ OSCURA ^</pattern>
+<that>^ TIENE LA PIEL OSCURA</that>
+<template>
+<think>
+	<set name="piel">oscura</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipiel"><map name="piel"><get var="item"/></map></set>
+			<condition var="ipiel">
+				<li value="clara">
+					<set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set>
+				</li>
+				<li><set var="cont"><map name="successor"><get var="cont"/></map></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Tiene la piel oscura... Bien. Tiene el pelo moreno?</li>
+		<li>Perfecto, me voy haciendo una idea. Tiene el pelo moreno?</li>
+		<li>Asi que tiene la piel oscura, <get name="nombre"/>. Dime si tiene el pelo moreno</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 13.1 -->
+<category>
+<pattern>^ CLARA ^</pattern>
+<that>^ TIENE LA PIEL OSCURA</that>
+<template>
+<think>
+	<set name="piel">clara</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipiel"><map name="piel"><get var="item"/></map></set>
+			<condition var="ipiel">
+				<li value="oscura">
+					<set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set>
+				</li>
+				<li><set var="cont"><map name="successor"><get var="cont"/></map></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Tiene la piel clara... Bien. Tiene el pelo moreno?</li>
+		<li>Perfecto, me voy haciendo una idea. Ahora dime, tiene el pelo moreno?</li>
+		<li>Asi que tiene la piel clara, <get name="nombre"/>. Dime si tiene el pelo moreno</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 13.2 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE LA PIEL OSCURA</that>
+<template>
+<srai>SU PIEL ES OSCURA</srai>
+</template>
+</category>
+
+<!-- Regla 13.3 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE LA PIEL OSCURA</that>
+<template>
+<srai>SU PIEL ES CLARA</srai>
+</template>
+</category>
+
+<!-- Regla 14: acerca del color del pelo -->
+<category>
+<pattern>^ MORENO ^</pattern>
+<that>^ TIENE EL PELO MORENO</that>
+<template>
+<think>
+	<set name="pelo">moreno</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipelo"><map name="pelo"><get var="item"/></map></set>
+			<condition var="ipelo">
+				<li value="moreno">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Vale, pelo moreno... A ver, tiene los ojos claros?</li>
+		<li>Bien! Tiene los ojos claros?</li>
+		<li>Asi que tiene el pelo moreno, <get name="nombre"/>. Dime si tiene los ojos claros</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.1 -->
+<category>
+<pattern>^ RUBIO ^</pattern>
+<that>^ TIENE EL PELO RUBIO</that>
+<template>
+<think>
+	<set name="pelo">rubio</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipelo"><map name="pelo"><get var="item"/></map></set>
+			<condition var="ipelo">
+				<li value="rubio">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Vale, pelo rubio... A ver, tiene los ojos claros?</li>
+		<li>Bien! Tiene los ojos claros?</li>
+		<li>Asi que tiene el pelo rubio, <get name="nombre"/>. Dime si tiene los ojos claros</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.2 -->
+<category>
+<pattern>^ PELIRROJO ^</pattern>
+<that>^ ES PELIRROJO</that>
+<template>
+<think>
+	<set name="pelo">pelirrojo</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipelo"><map name="pelo"><get var="item"/></map></set>
+			<condition var="ipelo">
+				<li value="pelirrojo">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Vale, su pelo es pelirrojo... A ver, tiene los ojos claros?</li>
+		<li>Bien! Tiene los ojos claros?</li>
+		<li>Asi que tiene el pelo pelirrojo, <get name="nombre"/>. Dime si tiene los ojos claros</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.2 -->
+<category>
+<pattern>^ CALVO ^</pattern>
+<that>^ ES CALVO</that>
+<template>
+<think>
+	<set name="pelo">calvo</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipelo"><map name="pelo"><get var="item"/></map></set>
+			<condition var="ipelo">
+				<li value="calvo">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Vale, es calvo... Tiene los ojos claros?</li>
+		<li>Bien... Tiene los ojos claros?</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.2 -->
+<category>
+<pattern>^ BLANCO ^</pattern>
+<that>^ TIENE EL PELO BLANCO</that>
+<template>
+<think>
+	<set name="pelo">blanco</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipelo"><map name="pelo"><get var="item"/></map></set>
+			<condition var="ipelo">
+				<li value="blanco">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Vale, es calvo... Tiene los ojos claros?</li>
+		<li>Bien... Tiene los ojos claros?</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.2 -->
+<category>
+<pattern>^ MARRON ^</pattern>
+<that>^ TIENE EL PELO MARRON</that>
+<template>
+<think>
+	<set name="pelo">marron</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ipelo"><map name="pelo"><get var="item"/></map></set>
+			<condition var="ipelo">
+				<li value="marron">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Vale, tiene el pelo marron... Ahora dime, tiene los ojos claros?</li>
+		<li>Bien, por fin... Tiene los ojos claros?</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.3 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE EL PELO MORENO</that>
+<template>
+<srai>SU PELO ES MORENO</srai>
+</template>
+</category>
+
+<!-- Regla 14.4 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE EL PELO MORENO</that>
+<template>
+<random>
+	<li>Vaya, asi que su pelo no es moreno... Tiene el pelo rubio?</li>
+	<li>No lo tiene moreno... Y rubio, tiene el pelo rubio?</li>
+	<li>Asi que no... Tiene el pelo rubio?</li>
+</random>
+</template>
+</category>
+
+<!-- Regla 14.5 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE EL PELO RUBIO</that>
+<template>
+<srai>SU PELO ES RUBIO</srai>
+</template>
+</category>
+
+<!-- Regla 14.6 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE EL PELO RUBIO</that>
+<template>
+<random>
+	<li>Tampoco es rubio?... Es pelirrojo?</li>
+	<li>Rubio tampoco... Y pelirrojo, es pelirrojo?</li>
+	<li>No es moreno, no es rubio... es pelirrojo?</li>
+</random>
+</template>
+</category>
+
+<!-- Regla 14.7 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ ES PELIRROJO</that>
+<template>
+<srai>SU PELO ES PELIRROJO</srai>
+</template>
+</category>
+
+<!-- Regla 14.8 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ ES PELIRROJO</that>
+<template>
+<condition name="genero">
+<li value="hombre">
+	Vale, entonces el personaje debe ser calvo... Es calvo?
+</li>
+<li>
+	<random>
+	<li>Tampoco es pelirroja?... Tiene el pelo blanco?</li>
+	<li>No es pelirroja... Tiene el pelo blanco?</li>
+	</random>
+</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 14.7 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ ES CALVO</that>
+<template>
+<srai>EL PERSONAJE ES CALVO</srai>
+</template>
+</category>
+
+<!-- Regla 14.8 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ ES CALVO</that>
+<template>
+<get name="nombre"/>, me querias engañar!
+No quedaba ningun personaje que no fuera calvo!
+</template>
+</category>
+
+<!-- Regla 14.5 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE EL PELO BLANCO</that>
+<template>
+<srai>SU PELO ES BLANCO</srai>
+</template>
+</category>
+
+<!-- Regla 14.6 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE EL PELO BLANCO</that>
+<template>
+Me lo estas poniendo complicado...
+A ver, solo queda que tenga el pelo marron. Tiene el pelo marron?
+</template>
+</category>
+
+<!-- Regla 14.5 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE EL PELO MARRON</that>
+<template>
+<srai>SU PELO ES MARRON</srai>
+</template>
+</category>
+
+<!-- Regla 14.6 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE EL PELO MARRON</that>
+<template>
+Me estas engañando! No me quedan mas colores de pelo!
+</template>
+</category>
+
+<!-- Regla 15: acerca del color de los ojos -->
+<category>
+<pattern>^ CLAROS ^</pattern>
+<that>^ TIENE LOS OJOS CLAROS</that>
+<template>
+<think>
+	<set name="ojos">claros</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="iojos"><map name="ojos"><get var="item"/></map></set>
+			<condition var="iojos">
+				<li value="claros">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Ojos claros... A ver, tiene barba?</li>
+		<li>Vale, ya queda poco... Y barba, tiene barba?</li>
+		<li>Me gustan los ojos claros... Dime si tiene barba</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 15.1 -->
+<category>
+<pattern>^ OSCUROS ^</pattern>
+<that>^ TIENE LOS OJOS CLAROS</that>
+<template>
+<think>
+	<set name="ojos">oscuros</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="iojos"><map name="ojos"><get var="item"/></map></set>
+			<condition var="iojos">
+				<li value="oscuros">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>
+		<random>
+		<li>Ojos oscuros... A ver, tiene barba?</li>
+		<li>Vale, ya queda poco... Y barba, tiene barba?</li>
+		<li>Vale, el personaje buscado tiene los ojos oscuros. Dime si tiene barba</li>
+		</random>
+	</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 15.3 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE LOS OJOS CLAROS</that>
+<template>
+<srai>SUS OJOS SON CLAROS</srai>
+</template>
+</category>
+
+<!-- Regla 15.4 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE LOS OJOS CLAROS</that>
+<template>
+<srai>SUS OJOS SON OSCUROS</srai>
+</template>
+</category>
+
+<!-- Regla 16: acerca de la barba -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE BARBA</that>
+<template>
+<think>
+	<set name="barba">si</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ibarba"><map name="barba"><get var="item"/></map></set>
+			<condition var="ibarba">
+				<li value="si">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>Tiene barba, bien. Y tiene bigote?</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 16.1 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE BARBA</that>
+<template>
+<think>
+	<set name="barba">no</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ibarba"><map name="barba"><get var="item"/></map></set>
+			<condition var="ibarba">
+				<li value="no">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+	<li>No tiene barba... Y tiene bigote?</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 17: acerca del bigote -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ TIENE BIGOTE</that>
+<template>
+<think>
+	<set name="bigote">si</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ibigote"><map name="bigote"><get var="item"/></map></set>
+			<condition var="ibigote">
+				<li value="si">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 17.1 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ TIENE BIGOTE</that>
+<template>
+<think>
+	<set name="bigote">no</set>
+	<set var="item"><srai>ITERATE <get name="lista_per"/></srai></set>
+	<set var="cont">1</set>
+</think>
+<condition var="item">
+	<li value="end"></li>
+	<li>
+		<think>
+			<set var="ibigote"><map name="bigote"><get var="item"/></map></set>
+			<condition var="ibigote">
+				<li value="no">
+					<set var="cont"><map name="successor"><get var="cont"/></map></set>
+				</li>
+				<li><set name="lista_per"><srai>REMOVEITEM <get var="cont"/> IN <get name="lista_per"/></srai></set></li>
+			</condition>
+			<set var="item">
+				<srai>NEXT</srai>
+			</set>
+		</think>
+		<loop/>
+	</li>
+</condition>
+<condition var="cont">
+	<li value="2">Lo tengo! El personaje es <get name="lista_per"/></li>
+	<li value="1">Mentiroso! Has intentado hacer trampa! No hay ningun personaje con estas caracteristicas</li>
+</condition>
+</template>
+</category>
+
+<!-- Regla 18: finalizacion de la partida -->
+<category>
+<pattern>^ HAS ACERTADO ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<random>
+	<li>Ha sido corta pero intensa. Buena partida, <get name="nombre"/>!</li>
+	<li>Muy bien pensado, aunque yo ya soy un experto del Quien es Quien ;)</li>
+	<li>Casi no lo acierto... Ha sido una buena partida!</li>
+</random>
+Te gustaria jugar de nuevo?
+</template>
+</category>
+
+<!-- Regla 18.1 -->
+<category>
+<pattern>^ HAS FALLADO ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+Vaya... Me puedes decir en que personaje habias pensado?
+</template>
+</category>
+
+<!-- Regla 18.2 -->
+<category>
+<pattern>^ ACERTASTE ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS ACERTADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.3 -->
+<category>
+<pattern>^ CORRECTO ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS ACERTADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.4 -->
+<category>
+<pattern>^ EXACTO ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS ACERTADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.5 -->
+<category>
+<pattern>^ BIEN ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS ACERTADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.6 -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS ACERTADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.7 -->
+<category>
+<pattern>^ FALLASTE ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS FALLADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.8 -->
+<category>
+<pattern>^ ERROR ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS FALLADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.9 -->
+<category>
+<pattern>^ MAL ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS FALLADO</srai>
+</template>
+</category>
+
+<!-- Regla 18.10 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ EL PERSONAJE ES ^</that>
+<template>
+<srai>HAS FALLADO</srai>
+</template>
+</category>
+
+<!-- Regla 19: comprobacion del error -->
+<category>
+<pattern>HABIA PENSADO EN *</pattern>
+<that>^ EN QUE PERSONAJE HABIAS PENSADO</that>
+<template>
+<think>
+	<set var="pensado"><star/></set>
+	<set var="lista_todos">Alejandro Alfonso Antonio Cristina Gabriela Ivan Javier Juan Laura Luis Marco Maria Paco Pepe Sofia Sonia</set>
+	<set var="encontrado"><srai>FINDITEM <get var="pensado"/> IN <get var="lista_todos"/></srai></set>
+	</think>
+	<condition var="encontrado">
+	<li value="0"><get var="pensado"/> no es ningun personaje...
+	Me puedes decir en que personaje habias pensado?
+	</li>
+	<li>
+		<think><set var="comparacion_genero"><srai>COMPARE <get name="genero"/> WITH <map name="genero"><get var="pensado"/></map></srai></set></think>
+		<condition var="comparacion_genero">
+		<li value="YES">
+			<think><set var="comparacion_piel"><srai>COMPARE <get name="piel"/> WITH <map name="piel"><get var="pensado"/></map></srai></set></think>
+			<condition var="comparacion_piel">
+			<li value="YES">
+				<think><set var="comparacion_pelo"><srai>COMPARE <get name="pelo"/> WITH <map name="pelo"><get var="pensado"/></map></srai></set></think>
+				<condition var="comparacion_pelo">
+				<li value="YES">
+					<think><set var="comparacion_ojos"><srai>COMPARE <get name="ojos"/> WITH <map name="ojos"><get var="pensado"/></map></srai></set></think>
+					<condition var="comparacion_ojos">
+					<li value="YES">
+						<think><set var="comparacion_barba"><srai>COMPARE <get name="barba"/> WITH <map name="barba"><get var="pensado"/></map></srai></set></think>
+						<condition var="comparacion_barba">
+						<li value="YES">
+							<think><set var="comparacion_bigote"><srai>COMPARE <get name="bigote"/> WITH <map name="bigote"><get var="pensado"/></map></srai></set></think>
+							<condition var="comparacion_bigote">
+							<li value="YES">
+								<get var="pensado"/> debe ser su hermano gemelo o la misma persona...
+							</li>
+							<li>Me has engañado! <get var="pensado"/> <map name="bigote"><get var="pensado"/></map> tiene bigote y <get name="lista_per"/> <get name="barba"/></li>
+							</condition>
+						</li>
+						<li>Me has engañado! <get var="pensado"/> <map name="barba"><get var="pensado"/></map> tiene barba y <get name="lista_per"/> <get name="barba"/></li>
+						</condition>
+					</li>
+					<li>Me has engañado! <get var="pensado"/> tiene los ojos <map name="ojos"><get var="pensado"/></map> y <get name="lista_per"/> tiene los ojos <get name="ojos"/></li>
+					</condition>
+				</li>
+				<li>Me has engañado! <get var="pensado"/> tiene el pelo <map name="pelo"><get var="pensado"/></map> y <get name="lista_per"/> tiene el pelo <get name="pelo"/></li>
+				</condition>
+			</li>
+			<li>Me has engañado! <get var="pensado"/> tiene la piel <map name="piel"><get var="pensado"/></map> y <get name="lista_per"/> tiene la piel <get name="piel"/></li>
+			</condition>
+		</li>
+		<li>Me has engañado! <get var="pensado"/> es <map name="genero"><get var="pensado"/></map> y <get name="lista_per"/> es <get name="genero"/></li>
+		</condition>
+	</li>
+	</condition>
+	Ya no quiero jugar contigo!
+	<think><set name="topic">unknown</set></think>
+</template>
+</category>
+
+<!-- Regla 20: jugar otra vez -->
+<category>
+<pattern>SI ^</pattern>
+<that>^ JUGAR DE NUEVO</that>
+<template>
+<srai>JUGAR A QUIEN ES QUIEN</srai>
+</template>
+</category>
+
+<!-- Regla 20.1 -->
+<category>
+<pattern>NO ^</pattern>
+<that>^ JUGAR DE NUEVO</that>
+<template>
+Ok, hora de hacer otra cosa!
+<think><set name="topic">unknown</set></think>
+</template>
+</category>
+
+</topic>
+
+</aiml>
+
